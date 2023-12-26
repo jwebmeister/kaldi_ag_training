@@ -1,0 +1,1 @@
+docker run -it --rm -v ${pwd}:/mnt/input -w /mnt/input jwebmeister/kaldi_ag_training $args
