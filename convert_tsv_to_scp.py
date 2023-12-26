@@ -15,7 +15,7 @@ if not os.path.exists(args.filename):
 os.makedirs(args.output_dir, exist_ok=True)
 lexicon = set()
 if args.lexicon_file:
-    with open(args.lexicon_file, 'r') as f:
+    with open(args.lexicon_file, 'r', encoding='utf8') as f:
         for line in f:
             word = line.strip().split(None, 1)[0]
             lexicon.add(word)
@@ -29,7 +29,7 @@ def normalize_script(script):
 
 utt2spk_dict, wav_dict, text_dict = {}, {}, {}
 num_entries, num_dropped_lexicon, num_dropped_missing_wav = 0, 0, 0
-with open(args.filename, 'r') as f:
+with open(args.filename, 'r', encoding='utf8') as f:
     for line in f:
         num_entries += 1
         fields = line.rstrip('\n').split('\t')
