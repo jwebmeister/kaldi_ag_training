@@ -1,0 +1,1 @@
+bash steps/online/nnet2/extract_ivectors_online.sh data/finetune_sp_vp_hires exp/nnet3_chain/extractor exp/nnet3_chain/ivectors_finetune_sp_vp_hires
