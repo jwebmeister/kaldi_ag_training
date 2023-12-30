@@ -1,5 +1,6 @@
+# docker build --build-arg=base=kaldiasr/kaldi:gpu-ubuntu18.04-cuda10.0 --build-arg=cuda=yes -t jwebmeister/kaldi_ag_training_gpu .
 # docker build --build-arg=base=ubuntu:22.04 -t jwebmeister/kaldi_ag_training .
-# docker build --build-arg=base=nvidia/cuda:12.3.1-devel-ubuntu22.04 --build-arg=cuda=yes -t jwebmeister/kaldi_ag_training_gpu .
+
 
 # cat Dockerfile.training | docker build --build-arg=base=debian:9.8 -t daanzu/kaldi_ag_training .
 # cat Dockerfile.training | docker build --build-arg=base=nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04 --build-arg=cuda=yes -t daanzu/kaldi_ag_training_gpu .
@@ -34,11 +35,12 @@ RUN apt-get update && \
 	    vim && \
     rm -rf /var/lib/apt/lists/*
 
-RUN ln -s /usr/bin/python2.7 /usr/bin/python
+# RUN ln -s /usr/bin/python2.7 /usr/bin/python
+
+RUN rm -rf /opt/kaldi/
 
 RUN git clone --depth 1 https://github.com/jwebmeister/kaldi-fork-active-grammar /opt/kaldi && \
     cd /opt/kaldi/tools && \
-    ./extras/install_mkl.sh && \
     make -j $(nproc) && \
     cd /opt/kaldi/src && \
     ./configure --shared ${cuda:+--use-cuda} && \
