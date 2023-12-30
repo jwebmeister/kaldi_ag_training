@@ -1,0 +1,1 @@
+python3 convert_tsv_to_scp.py -l kaldi_model_daanzu_20200905_1ep-mediumlm-base/dict/lexicon.txt retain/retain.tsv dataset
