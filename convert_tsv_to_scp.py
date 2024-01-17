@@ -25,7 +25,8 @@ else:
 
 def normalize_script(script):
     script = re.sub(r'[\-– ]', ' ', script)
-    script = re.sub(r'[,.?!:;"’\']', '', script)
+    script = re.sub(r'[,.?!:;"]', '', script)
+    script = re.sub(r'[’]', '\'', script)
     return script.strip().lower()
 
 utt2spk_dict, wav_dict, text_dict = {}, {}, {}
@@ -62,6 +63,9 @@ with open(os.path.join(args.output_dir, 'wav.scp'), 'w') as f:
 with open(os.path.join(args.output_dir, 'text'), 'w') as f:
     for (key, val) in text_dict.items():
         f.write('%s %s\n' % (key, val))
+with open(os.path.join(args.output_dir, 'spk2gender'), 'w') as f:
+    for (key, val) in utt2spk_dict.items():
+        f.write('%s %s\n' % (key, 'm'))
 
 if num_dropped_lexicon:
     print(f"{dropped_text_lexicon}")
